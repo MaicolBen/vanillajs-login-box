@@ -15,6 +15,15 @@ const app = initialize({
 })
 
 
+app.store.subscribe(()=>{
+  const {auth} = app.store.getState();
+  if(!auth.isLoading) {
+    if (!auth.isAuthenticated) {
+      app.loginWithRedirect()
+    }
+  }
+})
+
 document.querySelector('[fe-action="open-admin-portal"]').addEventListener('click', () => {
   app.showAdminPortal()
 })
@@ -57,4 +66,3 @@ app.store.subscribe(() => {
 
   style.innerHTML = styleHtml;
 })
-
